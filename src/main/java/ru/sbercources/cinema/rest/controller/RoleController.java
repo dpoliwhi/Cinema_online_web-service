@@ -6,19 +6,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.sbercources.cinema.model.Role;
-import ru.sbercources.cinema.repository.RoleRepository;
+import ru.sbercources.cinema.service.RoleService;
 
 @RestController
 @RequestMapping("/rest/role")
 public class RoleController {
-    private final RoleRepository roleRepository;
+    private final RoleService roleService;
 
-    public RoleController(RoleRepository roleRepository) {
-        this.roleRepository = roleRepository;
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+    public RoleController(RoleService roleService) {
+        this.roleService = roleService;
     }
 
     @GetMapping("/list")
     public List<Role> list() {
-        return roleRepository.findAll();
+        return roleService.getList();
     }
 }

@@ -1,6 +1,8 @@
 package ru.sbercources.cinema.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.util.Date;
@@ -28,6 +30,14 @@ public class Film extends GenericModel {
     @Enumerated
     private Genre genre;
 
-    @ManyToMany(mappedBy = "films", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JsonIgnore
+    @JoinTable(
+            name = "film_directors",
+            joinColumns = @JoinColumn(name = "film_id"),
+            foreignKey = @ForeignKey(name = "FK_FILMS_DIRECTORS"),
+            inverseJoinColumns = @JoinColumn(name = "director_id"),
+            inverseForeignKey = @ForeignKey(name = "FK_DIRECTORS_FILMS"))
     private Set<Directors> directors = new HashSet<>();
 }

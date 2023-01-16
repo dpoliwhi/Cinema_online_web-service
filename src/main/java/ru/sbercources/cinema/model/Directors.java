@@ -1,6 +1,8 @@
 package ru.sbercources.cinema.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import java.util.HashSet;
@@ -21,6 +23,7 @@ public class Directors extends GenericModel {
     private int position;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @JsonIgnore
     @JoinTable(
             name = "film_directors",
             joinColumns = @JoinColumn(name = "director_id"),

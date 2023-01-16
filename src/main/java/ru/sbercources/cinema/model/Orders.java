@@ -1,7 +1,10 @@
 package ru.sbercources.cinema.model;
 
 import javax.persistence.*;
+
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
 
@@ -17,7 +20,7 @@ public class Orders extends GenericModel {
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_ORDERED_USER"))
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "film_id", foreignKey = @ForeignKey(name = "FK_ORDERED_FILM"))
     private Film film;
 
@@ -26,4 +29,7 @@ public class Orders extends GenericModel {
 
     @Column(name = "rent_period")
     private LocalDate rentPeriod;
+
+    @Column(name = "purchase")
+    private boolean purchase;
 }
