@@ -31,7 +31,7 @@ public class Film extends GenericModel {
     private Genre genre;
 
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
     @JoinTable(
             name = "film_directors",

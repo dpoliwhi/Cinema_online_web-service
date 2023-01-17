@@ -17,9 +17,21 @@ import java.util.List;
 public class FilmController extends GenericController<Film> {
 
     public final FilmService service;
+
     public FilmController(FilmService service) {
         super(service);
         this.service = service;
+    }
+
+    @ResponseBody
+    @PutMapping("/addDirectors/{id}")
+    @Operation(description = "Добавить режиссеров к фильму по id", method = "AddDirectors")
+    public ResponseEntity<?> addDirectors(@PathVariable Long id, @RequestBody List<Directors> directorsToAdd) {
+        try {
+            return ResponseEntity.ok().body(service.addDirector(id, directorsToAdd));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No such film with id " + id);
+        }
     }
 
     @GetMapping("/search")
@@ -30,6 +42,4 @@ public class FilmController extends GenericController<Film> {
     ) {
         return service.search(title, country, genre);
     }
-
-
 }

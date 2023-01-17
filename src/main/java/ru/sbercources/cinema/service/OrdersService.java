@@ -38,4 +38,8 @@ public class OrdersService extends GenericService<Orders> {
     protected List<Orders> getAllByUser(User user) {
         return repository.findAllByUser(user);
     }
+
+    protected Orders getOrderByFilm(Film film) {
+        return repository.findByFilm(film);
+    }
 }

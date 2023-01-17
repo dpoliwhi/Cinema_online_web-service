@@ -22,7 +22,7 @@ public class Directors extends GenericModel {
     @Column(name = "position")
     private int position;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
     @JoinTable(
             name = "film_directors",
