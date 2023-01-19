@@ -1,5 +1,6 @@
 package ru.sbercources.cinema.mapper;
 
+import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import ru.sbercources.cinema.dto.GenericDto;
@@ -32,5 +33,31 @@ public abstract class GenericMapper<E extends GenericModel, D extends GenericDto
         return Objects.isNull(entity)
                 ? null
                 : mapper.map(entity, dtoClass);
+    }
+
+    Converter<D, E> toEntityConverter() {
+        return context -> {
+            D source = context.getSource();
+            E destination = context.getDestination();
+            mapSpecificFields(source, destination);
+            return context.getDestination();
+        };
+    }
+    Converter<E, D> toDtoConverter() {
+        return context -> {
+            E source = context.getSource();
+            D destination = context.getDestination();
+            mapSpecificFields(source, destination);
+            return context.getDestination();
+        };
+    }
+
+
+    void mapSpecificFields(E source, D destination) {
+
+    }
+
+    void mapSpecificFields(D source, E destination) {
+
     }
 }

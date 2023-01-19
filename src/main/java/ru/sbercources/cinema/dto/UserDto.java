@@ -9,7 +9,7 @@ import java.util.Date;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class UserDto extends GenericDto {
     private Long id;
     private String login;
     private String password;
