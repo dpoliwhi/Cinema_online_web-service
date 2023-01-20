@@ -1,10 +1,10 @@
 package ru.sbercources.cinema.service;
 
-import java.util.List;
-
 import org.springframework.stereotype.Service;
 import ru.sbercources.cinema.model.Role;
 import ru.sbercources.cinema.repository.RoleRepository;
+
+import java.util.List;
 
 @Service
 public class RoleService {

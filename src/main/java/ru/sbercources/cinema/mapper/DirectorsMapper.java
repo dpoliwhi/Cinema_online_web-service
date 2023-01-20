@@ -35,12 +35,16 @@ public class DirectorsMapper extends GenericMapper<Directors, DirectorsDto> {
 
     @Override
     void mapSpecificFields(Directors source, DirectorsDto destination) {
-        destination.setFilmsIds(getIds(source));
+//        destination.setFilmsIds(getIds(source));
     }
 
     @Override
     void mapSpecificFields(DirectorsDto source, Directors destination) {
-        destination.setFilms(filmRepository.findAllByIdIn(source.getFilmsIds()));
+        if (!Objects.isNull(source.getFilmsIds())) {
+            destination.setFilms(filmRepository.findAllByIdIn(source.getFilmsIds()));
+        } else {
+            destination.setFilms(null);
+        }
     }
 
     private Set<Long> getIds(Directors director) {
