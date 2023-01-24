@@ -8,7 +8,7 @@
 </head>
 <body>
 <div layout:fragment="content">
-    <h1>Добавить автора</h1>
+    <h1>Добавить участника</h1>
 
     <form method="POST" th:action="@{/directors/add}" th:object="${directorsForm}">
         <div class="mb-3">
@@ -17,8 +17,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="position" class="form-label">Рейтинг</label>
-            <input name="position" type="number" class="form-control" id="position">
+            <label for="position" class="form-label">Позиция</label>
+            <input name="position" type="text" class="form-control" id="position">
         </div>
 
         <button type="submit" class="btn btn-primary">Добавить</button>

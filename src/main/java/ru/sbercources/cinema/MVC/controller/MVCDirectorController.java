@@ -2,10 +2,7 @@ package ru.sbercources.cinema.MVC.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.sbercources.cinema.dto.DirectorsDto;
 import ru.sbercources.cinema.mapper.DirectorsMapper;
 import ru.sbercources.cinema.service.DirectorsService;
@@ -38,4 +35,23 @@ public class MVCDirectorController {
         service.create(mapper.toEntity(directorsDto));
         return "redirect:/directors";
     }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        service.delete(id);
+        return "redirect:/directors";
+    }
+
+    @GetMapping("/update/{id}")
+    public String update(@PathVariable Long id, Model model) {
+        model.addAttribute("director", mapper.toDto(service.getOneById(id)));
+        return "directors/updateDirector";
+    }
+
+    @PostMapping("/update")
+    public String update(@ModelAttribute("directorForm") DirectorsDto directorsDto) {
+        service.update(mapper.toEntity(directorsDto));
+        return "redirect:/directors";
+    }
+
 }

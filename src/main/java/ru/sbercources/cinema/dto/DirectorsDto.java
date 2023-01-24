@@ -1,9 +1,10 @@
 package ru.sbercources.cinema.dto;
 
-import lombok.*;
-import ru.sbercources.cinema.model.Film;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Column;
 import java.util.Set;
 
 @Getter
@@ -12,6 +13,6 @@ import java.util.Set;
 @AllArgsConstructor
 public class DirectorsDto extends GenericDto {
     private String directorsFio;
-    private int position;
+    private String position;
     private Set<Long> filmsIds;
 }

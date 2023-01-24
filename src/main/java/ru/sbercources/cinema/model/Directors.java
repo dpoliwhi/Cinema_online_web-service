@@ -20,7 +20,7 @@ public class Directors extends GenericModel {
     private String directorsFio;
 
     @Column(name = "position")
-    private int position;
+    private String position;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonIgnore
