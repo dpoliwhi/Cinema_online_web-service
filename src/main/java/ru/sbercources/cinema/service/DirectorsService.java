@@ -1,5 +1,7 @@
 package ru.sbercources.cinema.service;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import ru.sbercources.cinema.model.Directors;
 import ru.sbercources.cinema.model.Film;
@@ -39,5 +41,9 @@ public class DirectorsService extends GenericService<Directors> {
                         .forEach(filmRepository::delete);
             }
         }
+    }
+
+    public Page<Directors> listAllPaginated(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 }

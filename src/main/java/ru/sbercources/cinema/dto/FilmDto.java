@@ -13,7 +13,7 @@ import java.util.Set;
 public class FilmDto extends GenericDto {
 
     private String title;
-    private Date premierYear;
+    private Integer premierYear;
     private String country;
     private Genre genre;
     private Set<Long> directorsIds;

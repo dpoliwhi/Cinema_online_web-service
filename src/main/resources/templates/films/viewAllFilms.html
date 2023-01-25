@@ -4,43 +4,23 @@
       lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Фильмы</title>
+    <title>Films</title>
 </head>
 <body>
 
 <div layout:fragment="content">
     <h1>Фильмы</h1>
 
-<!--    &lt;!&ndash; TODO Доделать создание&ndash;&gt;-->
-<!--    <div class="row">-->
-<!--        <div class="col">-->
-<!--            <a-->
-<!--                    href="films/add"-->
-<!--                    class="btn btn-secondary"-->
-<!--                    role="button"-->
-<!--                    style="float: right"-->
-<!--                    aria-disabled="true">Добавить фильм</a>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--    <div class="row mt-3">-->
-<!--        <div class="col">-->
-<!--            <form method="POST" action="films/search" th:object="${searchbooks}">-->
-<!--                <div class="row">-->
-<!--                    <div class="col-auto">-->
-<!--                        <label for="authorFIO" class="col-form-label">ФИО автора</label>-->
-<!--                    </div>-->
-<!--                    <div class="col-10">-->
-<!--                        <input placeholder="Введите ФИО автора" type="text" id="authorFIO" class="form-control" name="authorFIO">-->
-<!--                    </div>-->
-<!--                    <div class="col-auto">-->
-<!--                        &lt;!&ndash; TODO Доделать поиск&ndash;&gt;-->
-<!--                        <button type="submit" class="btn btn-primary">Поиск</button>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
+    <div class="row">
+        <div class="col">
+            <a
+                    href="films/add"
+                    class="btn btn-secondary"
+                    role="button"
+                    style="float: right"
+                    aria-disabled="true">Добавить фильм</a>
+        </div>
+    </div>
 
     <table class="table">
         <thead>
@@ -61,37 +41,40 @@
             <td th:text="${film.genre.getGenreText()}"></td>
             <td th:text="${film.directorsIds}"></td>
             <td>
-                <a style="float: right" class="btn btn-danger ms-1" th:href="'/books/delete/' + ${film.id}">Удалить</a>
-                <a style="float: right" class="btn btn-warning" th:href="'/books/update/' + ${film.id}">Обновить</a>
+                <a style="float: right" class="btn btn-danger ms-1" th:href="'/films/delete/' + ${film.id}">Удалить</a>
+                <a style="float: right" class="btn btn-warning ms-1"
+                   th:href="'/films/update/' + ${film.id}">Обновить</a>
+                <a style="float: right" class="btn btn-warning" th:href="'/films/addDirector/' + ${film.id}">Добавить
+                    участника</a>
             </td>
         </tr>
         </tbody>
     </table>
 
-<!--    <nav aria-label="Pagination" th:if="${books.totalPages gt 0}">-->
-<!--        <ul class="pagination justify-content-center font-weight-bold">-->
-<!--            <li class="page-item" th:classappend="${books.number eq 0} ? 'disabled'">-->
-<!--                <a class="page-link"-->
-<!--                   th:href="@{/books?page={id}(id=${books.number lt 2 ? 1 : books.number})}"-->
-<!--                   aria-label="Previous" title="Previous Page" data-toggle="tooltip">-->
-<!--                    <span aria-hidden="true">&laquo;</span>-->
-<!--                </a>-->
-<!--            </li>-->
-<!--            <li class="page-item"-->
-<!--                th:each="i : ${#numbers.sequence(1, books.totalPages, 1)}"-->
-<!--                th:classappend="${i eq books.number + 1} ? 'active'">-->
-<!--                <a class="page-link" th:href="@{/books?page={id}(id=${i})}" th:text="${i}"-->
-<!--                   th:title="${'Page '+ i}" data-toggle="tooltip"></a>-->
-<!--            </li>-->
-<!--            <li class="page-item" th:classappend="${books.number eq books.totalPages - 1} ? 'disabled'">-->
-<!--                <a class="page-link"-->
-<!--                   th:href="@{/books?page={id}(id=${books.number + 2})}"-->
-<!--                   aria-label="Next" title="Next Page" data-toggle="tooltip">-->
-<!--                    <span aria-hidden="true">&raquo;</span>-->
-<!--                </a>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </nav>-->
+    <nav aria-label="Pagination" th:if="${films.totalPages gt 0}">
+        <ul class="pagination justify-content-center font-weight-bold">
+            <li class="page-item" th:classappend="${films.number eq 0} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/films?page={id}(id=${films.number lt 2 ? 1 : films.number})}"
+                   aria-label="Previous" title="Previous Page" data-toggle="tooltip">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            <li class="page-item"
+                th:each="i : ${#numbers.sequence(1, films.totalPages, 1)}"
+                th:classappend="${i eq films.number + 1} ? 'active'">
+                <a class="page-link" th:href="@{/films?page={id}(id=${i})}" th:text="${i}"
+                   th:title="${'Page '+ i}" data-toggle="tooltip"></a>
+            </li>
+            <li class="page-item" th:classappend="${films.number eq films.totalPages - 1} ? 'disabled'">
+                <a class="page-link"
+                   th:href="@{/films?page={id}(id=${films.number + 2})}"
+                   aria-label="Next" title="Next Page" data-toggle="tooltip">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 </body>

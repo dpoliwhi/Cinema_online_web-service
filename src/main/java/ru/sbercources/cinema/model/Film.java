@@ -21,7 +21,7 @@ public class Film extends GenericModel {
     private String title;
 
     @Column(name = "premier_year")
-    private Date premierYear;
+    private Integer premierYear;
 
     @Column(name = "country")
     private String country;
