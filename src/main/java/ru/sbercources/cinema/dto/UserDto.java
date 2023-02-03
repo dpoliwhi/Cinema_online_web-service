@@ -1,8 +1,10 @@
 package ru.sbercources.cinema.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
-import java.util.Date;
+import java.sql.Date;
+
 
 @Getter
 @Setter
@@ -16,6 +18,7 @@ public class UserDto extends GenericDto {
     private String firstName;
     private String lastName;
     private String middleName;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'")
     private Date birthDate;
     private String phone;
     private String address;

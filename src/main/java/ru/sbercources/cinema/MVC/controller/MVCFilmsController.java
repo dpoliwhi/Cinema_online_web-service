@@ -8,8 +8,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.sbercources.cinema.dto.FilmDto;
+import ru.sbercources.cinema.dto.FilmsWithDirectorsDto;
 import ru.sbercources.cinema.mapper.DirectorsMapper;
 import ru.sbercources.cinema.mapper.FilmMapper;
+import ru.sbercources.cinema.mapper.FilmsWithDirectorsMapper;
 import ru.sbercources.cinema.model.Directors;
 import ru.sbercources.cinema.model.Film;
 import ru.sbercources.cinema.service.DirectorsService;
@@ -25,12 +27,14 @@ public class MVCFilmsController {
     private final DirectorsMapper directorsMapper;
     private final FilmService service;
     private final FilmMapper mapper;
+    private final FilmsWithDirectorsMapper filmsWithDirectorsMapper;
 
-    public MVCFilmsController(DirectorsService directorsService, DirectorsMapper directorsMapper, FilmService service, FilmMapper mapper) {
+    public MVCFilmsController(DirectorsService directorsService, DirectorsMapper directorsMapper, FilmService service, FilmMapper mapper, FilmsWithDirectorsMapper filmsWithDirectorsMapper) {
         this.directorsService = directorsService;
         this.directorsMapper = directorsMapper;
         this.service = service;
         this.mapper = mapper;
+        this.filmsWithDirectorsMapper = filmsWithDirectorsMapper;
     }
 
     @GetMapping("")
@@ -41,9 +45,9 @@ public class MVCFilmsController {
     ) {
         PageRequest pageRequest = PageRequest.of(page - 1, pageSize, Sort.by(Sort.Direction.ASC, "title"));
         Page<Film> onePage = service.listAllPaginated(pageRequest);
-        List<FilmDto> filmDtos = onePage
+        List<FilmsWithDirectorsDto> filmDtos = onePage
                 .stream()
-                .map(mapper::toDto)
+                .map(filmsWithDirectorsMapper::toDto)
                 .toList();
         model.addAttribute("films", new PageImpl<>(filmDtos, pageRequest, onePage.getTotalElements()));
         return "films/viewAllFilms";

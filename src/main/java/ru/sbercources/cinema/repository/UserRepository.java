@@ -5,4 +5,6 @@ import ru.sbercources.cinema.model.User;
 
 @Repository
 public interface UserRepository extends GenericRepository<User> {
+
+    User findUserByLogin(String username);
 }

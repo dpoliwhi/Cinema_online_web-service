@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       layout:decorate="~{layout}"
       lang="en">
 <head>
@@ -14,6 +15,7 @@
     <div class="row">
         <div class="col">
             <a
+                    sec:authorize="isAuthenticated() && (hasRole('ADMIN') || hasRole('MANAGER'))"
                     href="films/add"
                     class="btn btn-secondary"
                     role="button"
@@ -39,13 +41,22 @@
             <td th:text="${film.premierYear}"></td>
             <td th:text="${film.country}"></td>
             <td th:text="${film.genre.getGenreText()}"></td>
-            <td th:text="${film.directorsIds}"></td>
             <td>
-                <a style="float: right" class="btn btn-danger ms-1" th:href="'/films/delete/' + ${film.id}">Удалить</a>
-                <a style="float: right" class="btn btn-warning ms-1"
-                   th:href="'/films/update/' + ${film.id}">Обновить</a>
-                <a style="float: right" class="btn btn-warning" th:href="'/films/addDirector/' + ${film.id}">Добавить
-                    участника</a>
+                <ul>
+                    <li th:each="director : ${film.directors}" th:text="${director.directorsFio}"></li>
+                </ul>
+            </td>
+
+            <!--            <td th:text="${film.directorsIds}"></td>-->
+            <td>
+                <div sec:authorize="isAuthenticated() && (hasRole('ADMIN') || hasRole('MANAGER'))">
+                    <a style="float: right" class="btn btn-danger ms-1"
+                       th:href="'/films/delete/' + ${film.id}">Удалить</a>
+                    <a style="float: right" class="btn btn-warning ms-1"
+                       th:href="'/films/update/' + ${film.id}">Обновить</a>
+                    <a style="float: right" class="btn btn-warning" th:href="'/films/addDirector/' + ${film.id}">Добавить
+                        участника</a>
+                </div>
             </td>
         </tr>
         </tbody>
